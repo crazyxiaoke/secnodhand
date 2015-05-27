@@ -2,31 +2,22 @@ package com.app.secnodhand.base;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
-import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
-import android.content.IntentFilter;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
-import android.text.Editable;
-import android.text.TextWatcher;
-import android.util.Log;
-import android.view.KeyEvent;
 import android.view.LayoutInflater;
-import android.view.View;
-import android.widget.EditText;
-import android.widget.ImageView;
-import android.widget.RelativeLayout;
 
 import com.app.secnodhand.Constants;
 import com.app.secnodhand.R;
-import com.app.secnodhand.activity.MainActivity;
 import com.app.secnodhand.imageutil.ImageCache;
 import com.app.secnodhand.imageutil.ImageFetcher;
 import com.app.secnodhand.util.AppUtil;
 
+import java.lang.reflect.Field;
 
-public class BaseActivity extends Activity{
+
+public abstract class BaseActivity extends FragmentActivity{
 	protected Activity thisActivity;
 	protected ProgressDialog progressDialog;
 	protected Context mContext;
@@ -34,15 +25,40 @@ public class BaseActivity extends Activity{
 	protected ImageFetcher mImageFetcher;
     protected Intent mIntent;
 
+    protected abstract int getLayoutId();
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
+        setContentView(getLayoutId());
 		mContext=this;
 		thisActivity=this;
 		inflater = LayoutInflater.from(mContext);
         mIntent=getIntent();
+        autoInjectAllField();
 	}
+
+    protected void autoInjectAllField(){
+        try{
+            Class<?> cls=this.getClass();
+            Field[] fields=cls.getDeclaredFields();
+            for(Field field:fields){
+                if(field.isAnnotationPresent(ViewInject.class)){
+                    ViewInject inject=field.getAnnotation(ViewInject.class);
+                    int id=inject.value();
+                    if(id>0){
+                        field.setAccessible(true);
+                        field.set(this,this.findViewById(id));
+                    }
+                }
+            }
+        }catch(IllegalAccessException e){
+            e.printStackTrace();
+        }catch(IllegalArgumentException e){
+            e.printStackTrace();
+        }
+    }
 
 
 	
