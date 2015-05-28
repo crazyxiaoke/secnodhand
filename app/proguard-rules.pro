@@ -17,9 +17,8 @@
 #}
 
 -libraryjars libs/android-support-v4.jar
--libraryjars libs/baidumapapi_v3_4_0.jar
+-libraryjars libs/baidumapapi_v3_3_0.jar
 -libraryjars libs/certprocess.jar
--libraryjars libs/locSDK_5.0.jar
 
 
 -keep class com.baidu.mapapi.** { *; }

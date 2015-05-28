@@ -11,8 +11,37 @@
     <RelativeLayout
         android:id="@+id/main_top_layout"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="40dp"
         android:background="#3598db">
+
+        <ImageView
+            android:id="@+id/main_hand_pic"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/chat"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="15dp"/>
+
+        <TextView
+            android:id="@+id/main_nickname"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#ffffff"
+            android:text="路人甲"
+            android:textSize="14sp"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@+id/main_hand_pic"
+            android:layout_marginLeft="10dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="菜单"
+            android:textSize="14sp"
+            android:textColor="#ffffff"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="20dp"/>
 
 
     </RelativeLayout>
@@ -20,9 +49,43 @@
     <RelativeLayout
         android:id="@+id/main_bottom_layout"
         android:layout_width="match_parent"
-        android:layout_height="60dp"
+        android:layout_height="40dp"
         android:background="#ffffff"
         android:layout_alignParentBottom="true">
+
+        <Button
+            android:id="@+id/main_photo_btn"
+            android:layout_width="60dp"
+            android:layout_height="30dp"
+            android:text="照片"
+            android:textSize="14sp"
+            android:textColor="#ffffff"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="20dp"
+            android:layout_centerVertical="true"
+            android:background="#3598db"/>
+
+        <Button
+            android:id="@+id/main_send_btn"
+            android:layout_width="60dp"
+            android:layout_height="30dp"
+            android:text="发送"
+            android:textSize="14sp"
+            android:textColor="#ffffff"
+            android:layout_toLeftOf="@id/main_photo_btn"
+            android:layout_marginRight="14dp"
+            android:layout_centerVertical="true"
+            android:background="#3598db"/>
+
+        <EditText
+            android:id="@+id/main_message_edit"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:layout_toLeftOf="@id/main_send_btn"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="8dp"
+            android:layout_marginLeft="8dp"
+            android:background="@drawable/gray_frame"/>
 
     </RelativeLayout>
        

@@ -1,5 +1,7 @@
 package com.app.secnodhand;
 
+import android.util.Log;
+
 import com.baidu.location.BDLocation;
 import com.baidu.location.BDLocationListener;
 import com.baidu.location.LocationClient;
@@ -25,19 +27,20 @@ public class BaiduMapManager {
 	}
 
 	public void requestLocation(LocationChangedListener locationChangedListener) {
-		mLocClient = new LocationClient(MyApplication.mContext);
 		this.locationChangedListener = locationChangedListener;
 
 		mLocClient = new LocationClient(MyApplication.mContext);
 		mLocClient.registerLocationListener(locationListener);
 
 		LocationClientOption option = new LocationClientOption();
+        Log.d("TAG","11111");
 		option.setOpenGps(true); // 打开GPS
 		option.setAddrType("all"); // 返回的定位结果包含地址信息
 		option.setCoorType("bd09ll"); // 设置坐标类型
 		option.setScanSpan(0);
 		mLocClient.setLocOption(option);
 		mLocClient.start();
+        Log.d("TAG","22222");
 	}
 	
 	public void setScanSpan(int scanSpan){
@@ -57,6 +60,7 @@ public class BaiduMapManager {
 
 		@Override
 		public void onReceiveLocation(BDLocation location) {
+            Log.d("TAG", "location=" + location);
 			if (location == null)
 				return;
 

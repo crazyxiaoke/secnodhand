@@ -31,7 +31,7 @@ public class MainActivity extends BaseActivity{
     @ViewInject(R.id.main_mapview)
     private MapView mMapView;
     private BaiduMap mBaiduMap;
-    private MyLocationData locData;
+    private MyLocationData mLocData;
 
 
     @Override
@@ -47,6 +47,8 @@ public class MainActivity extends BaseActivity{
 
     private void initView(){
         mBaiduMap=mMapView.getMap();
+        mMapView.showZoomControls(false);
+        mMapView.showScaleControl(false);
         mBaiduMap.setMapType(BaiduMap.MAP_TYPE_NORMAL);
         mBaiduMap.setMapStatus(MapStatusUpdateFactory.zoomTo(15.5f));
     }
@@ -81,14 +83,14 @@ public class MainActivity extends BaseActivity{
                         LocationInfo locInfo = LocationInfo
                                 .fromBDLocationToLocationInfo(location);
                         MyApplication.sLocInfo = locInfo;
-                        locData = new MyLocationData.Builder().accuracy(locInfo.getAccuracy())
+                        mLocData = new MyLocationData.Builder().accuracy(locInfo.getAccuracy())
                                 .direction(100).latitude(locInfo.getLatitude())
                                 .longitude(locInfo.getLongitude()).build();
                         Log.d("TAG","lat="+locInfo.getLatitude());
                         Log.d("TAG","lng="+locInfo.getLongitude());
                         if(mBaiduMap!=null){
                             mBaiduMap.setMyLocationEnabled(true);
-                            mBaiduMap.setMyLocationData(locData);
+                            mBaiduMap.setMyLocationData(mLocData);
                             LatLng ll = new LatLng(locInfo.getLatitude(), locInfo.getLongitude());
                             MapStatusUpdate u = MapStatusUpdateFactory.newLatLng(ll);
                             mBaiduMap.animateMapStatus(u);

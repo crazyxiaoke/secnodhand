@@ -6,6 +6,7 @@ import android.content.SharedPreferences;
 import android.os.Environment;
 import android.preference.PreferenceManager;
 import android.telephony.TelephonyManager;
+import android.util.Log;
 
 
 import com.app.secnodhand.entity.LocationInfo;
@@ -25,9 +26,11 @@ public class MyApplication extends Application{
 	public void onCreate() {
 		// TODO Auto-generated method stub
 		super.onCreate();
-		mContext=this.getApplicationContext();
+        Log.d("TAG","MyApplication启动");
+		mContext=getApplicationContext();
+        Log.d("TAG","mContext="+mContext.getPackageName());
 		config = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
-        SDKInitializer.initialize(mContext);
+        SDKInitializer.initialize(getApplicationContext());
 	}
 
 
