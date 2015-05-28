@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
+import android.telephony.TelephonyManager;
 import android.view.LayoutInflater;
 
 import com.app.secnodhand.Constants;
@@ -58,6 +59,7 @@ public abstract class BaseActivity extends FragmentActivity{
         }catch(IllegalArgumentException e){
             e.printStackTrace();
         }
+
     }
 
 
