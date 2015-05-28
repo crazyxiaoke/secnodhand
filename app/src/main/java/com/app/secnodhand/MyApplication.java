@@ -8,14 +8,16 @@ import android.preference.PreferenceManager;
 import android.telephony.TelephonyManager;
 
 
-import org.json.JSONException;
-import org.json.JSONObject;
+import com.app.secnodhand.entity.LocationInfo;
+import com.baidu.mapapi.SDKInitializer;
+
 
 
 public class MyApplication extends Application{
 
 	public static Context mContext;
 	public static SharedPreferences config;
+    public static LocationInfo sLocInfo;
 
 
 
@@ -25,6 +27,7 @@ public class MyApplication extends Application{
 		super.onCreate();
 		mContext=this.getApplicationContext();
 		config = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
+        SDKInitializer.initialize(mContext);
 	}
 
 

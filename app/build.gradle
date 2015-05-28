@@ -12,9 +12,12 @@ android {
         versionName "1.0"
     }
 
-    signingConfigs{
-        debug {
-
+    signingConfigs {
+        release {
+            storeFile file("../secondhand.jks")
+            storePassword "secondhand"
+            keyAlias "secondhand"
+            keyPassword "secondhand"
         }
     }
 
@@ -26,10 +29,12 @@ android {
             minifyEnabled false
             zipAlignEnabled false
             shrinkResources false
-            signingConfig signingConfigs.debug
+            signingConfig signingConfigs.release
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
         release {
             minifyEnabled false
+            signingConfig signingConfigs.release
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }

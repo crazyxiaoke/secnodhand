@@ -155,9 +155,4 @@ public abstract class BaseActivity extends FragmentActivity{
 
 	}
 
-    protected boolean pushbackToHome() {
-
-        return false;
-    }
-
 }

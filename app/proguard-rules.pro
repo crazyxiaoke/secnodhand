@@ -15,3 +15,20 @@
 #-keepclassmembers class fqcn.of.javascript.interface.for.webview {
 #   public *;
 #}
+
+-libraryjars libs/android-support-v4.jar
+-libraryjars libs/baidumapapi_v3_4_0.jar
+-libraryjars libs/certprocess.jar
+-libraryjars libs/locSDK_5.0.jar
+
+
+-keep class com.baidu.mapapi.** { *; }
+-keep class com.baidu.platform.** { *; }
+-keep class com.baidu.location.** { *; }
+-keep class com.baidu.vi.** { *; }
+
+-keep public class [com.app.secondhand].R$*{
+    public static final int *;
+}
+
+
