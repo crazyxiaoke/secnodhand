@@ -85,6 +85,8 @@
     <orderEntry type="jdk" jdkName="Android API 21 Platform" jdkType="Android SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" exported="" name="android-support-v4" level="project" />
+    <orderEntry type="library" exported="" name="locSDK_5.0" level="project" />
+    <orderEntry type="library" exported="" name="baidumapapi_v3_4_0" level="project" />
     <orderEntry type="library" exported="" name="certprocess" level="project" />
   </component>
 </module>
