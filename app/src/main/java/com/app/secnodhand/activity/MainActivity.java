@@ -5,6 +5,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.telephony.TelephonyManager;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
@@ -17,6 +18,8 @@ import com.app.secnodhand.R;
 import com.app.secnodhand.base.BaseActivity;
 import com.app.secnodhand.base.ViewInject;
 import com.app.secnodhand.entity.LocationInfo;
+import com.app.secnodhand.util.AppUtil;
+import com.app.secnodhand.view.MainMenuPopWindow;
 import com.baidu.location.BDLocation;
 import com.baidu.mapapi.map.BaiduMap;
 import com.baidu.mapapi.map.BitmapDescriptor;
@@ -70,11 +73,16 @@ public class MainActivity extends BaseActivity{
         menu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                text=new TextView(mContext);
-//                text.setLayoutParams(new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT,RelativeLayout.LayoutParams.MATCH_PARENT));
-                text.setBackgroundColor(0xffff0000);
-                text.setAnimation(AnimationUtils.loadAnimation(mContext,R.anim.map_bz_anim));
-                addContentView(text,new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT,RelativeLayout.LayoutParams.MATCH_PARENT));
+                View menu=inflater.inflate(R.layout.main_right_menu,null);
+                TextView menu_one=(TextView)menu.findViewById(R.id.main_right_menu_one);
+                final MainMenuPopWindow mMainMenuPopWindow=MainMenuPopWindow.getInterface(menu, AppUtil.convertDpToPx(80),AppUtil.convertDpToPx(100));
+                mMainMenuPopWindow.show(view, Gravity.TOP|Gravity.RIGHT,AppUtil.convertDpToPx(10),AppUtil.convertDpToPx(70));
+                menu_one.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        mMainMenuPopWindow.dismiss();
+                    }
+                });
             }
         });
     }
