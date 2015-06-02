@@ -19,11 +19,22 @@ import com.app.secnodhand.base.ViewInject;
 import com.app.secnodhand.entity.LocationInfo;
 import com.baidu.location.BDLocation;
 import com.baidu.mapapi.map.BaiduMap;
+import com.baidu.mapapi.map.BitmapDescriptor;
+import com.baidu.mapapi.map.BitmapDescriptorFactory;
 import com.baidu.mapapi.map.MapStatusUpdate;
 import com.baidu.mapapi.map.MapStatusUpdateFactory;
 import com.baidu.mapapi.map.MapView;
+import com.baidu.mapapi.map.Marker;
+import com.baidu.mapapi.map.MarkerOptions;
 import com.baidu.mapapi.map.MyLocationData;
+import com.baidu.mapapi.map.OverlayOptions;
 import com.baidu.mapapi.model.LatLng;
+import com.baidu.mapapi.search.core.PoiInfo;
+import com.baidu.mapapi.search.poi.OnGetPoiSearchResultListener;
+import com.baidu.mapapi.search.poi.PoiDetailResult;
+import com.baidu.mapapi.search.poi.PoiNearbySearchOption;
+import com.baidu.mapapi.search.poi.PoiResult;
+import com.baidu.mapapi.search.poi.PoiSearch;
 
 /**
  * Created by zxk on 15-5-26.
@@ -68,6 +79,33 @@ public class MainActivity extends BaseActivity{
         });
     }
 
+    private void searchPoi(LatLng location){
+        PoiSearch mPoiSearch=PoiSearch.newInstance();
+
+        OnGetPoiSearchResultListener mPoiListener=new OnGetPoiSearchResultListener() {
+            @Override
+            public void onGetPoiResult(PoiResult poiResult) {
+                Log.d("TAG","poiResult="+poiResult.getTotalPoiNum());
+                if(poiResult.getTotalPoiNum()>0){
+                    for (PoiInfo poiInfo:poiResult.getAllPoi()) {
+                        BitmapDescriptor sit=new BitmapDescriptorFactory().fromResource(R.drawable.location);
+                        OverlayOptions overlayOptions = new MarkerOptions().position(poiInfo.location).icon(sit);
+                        Marker marker=(Marker)(mBaiduMap.addOverlay(overlayOptions));
+                    }
+                }
+            }
+
+            @Override
+            public void onGetPoiDetailResult(PoiDetailResult poiDetailResult) {
+
+            }
+        };
+
+        mPoiSearch.setOnGetPoiSearchResultListener(mPoiListener);
+        mPoiSearch.searchNearby(new PoiNearbySearchOption().pageCapacity(50).radius(5000).keyword("美食").location(location));
+        mPoiSearch.searchNearby(new PoiNearbySearchOption().pageCapacity(50).radius(5000).keyword("KTV").location(location));
+    }
+
     @Override
     protected void onDestroy() {
         super.onDestroy();
@@ -107,8 +145,10 @@ public class MainActivity extends BaseActivity{
                             LatLng ll = new LatLng(locInfo.getLatitude(), locInfo.getLongitude());
                             MapStatusUpdate u = MapStatusUpdateFactory.newLatLng(ll);
                             mBaiduMap.animateMapStatus(u);
+                            searchPoi(ll);
                         }
                     }
                 });
     }
+
 }
