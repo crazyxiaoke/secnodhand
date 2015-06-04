@@ -9,6 +9,7 @@ import android.view.Gravity;
 import android.view.View;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -48,6 +49,10 @@ public class MainActivity extends BaseActivity{
     private MapView mMapView;
     @ViewInject(R.id.main_menu)
     private TextView menu;
+    @ViewInject(R.id.main_hand_pic)
+    private ImageView mHandPic;
+    @ViewInject(R.id.main_send_btn)
+    private Button mSend;
     private BaiduMap mBaiduMap;
     private MyLocationData mLocData;
     private TextView text;
@@ -83,6 +88,13 @@ public class MainActivity extends BaseActivity{
                         mMainMenuPopWindow.dismiss();
                     }
                 });
+            }
+        });
+
+        mSend.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+//                pushView(SelectPhotoActivity.class,null);
             }
         });
     }

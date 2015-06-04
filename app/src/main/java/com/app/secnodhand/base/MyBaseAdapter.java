@@ -20,6 +20,11 @@ public class MyBaseAdapter<T> extends BaseAdapter {
 		this.dataList = new ArrayList<T>();
 	}
 
+    public MyBaseAdapter(List<T> dataList){
+        this.inflater=LayoutInflater.from(MyApplication.mContext);
+        this.dataList=dataList;
+    }
+
 	public List<T> getData() {
 		return dataList;
 	}

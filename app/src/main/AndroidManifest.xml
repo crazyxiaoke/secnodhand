@@ -33,6 +33,9 @@
             </intent-filter>
         </activity>
 
+        <activity android:name=".activity.SelectPhotoActivity"
+            android:screenOrientation="portrait" />
+
         <service
             android:name="com.baidu.location.f"
             android:enabled="true"
